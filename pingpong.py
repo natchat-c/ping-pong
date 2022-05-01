@@ -43,8 +43,8 @@ clock = time.Clock()
 FPS = 60
 clock.tick(FPS)
 
-ball_speed_x= 2
-ball_speed_y = 2
+ball_speed_x= 3
+ball_speed_y = 3
 
 finish = False
 
