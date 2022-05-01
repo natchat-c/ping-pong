@@ -43,6 +43,17 @@ clock = time.Clock()
 FPS = 60
 clock.tick(FPS)
 
+ball_speed_x= 2
+ball_speed_y = 2
+
+finish = False
+
+font.init()
+font1 = font.Font(None, 35)
+lose1 = font1.render('PLAYER 1 LOSES!', True, (180,0,0))
+lose2 = font1.render('PLAYER 2 LOSES!', True, (180,0,0))
+
+
 while Game:
     window.blit(background,(0,0))
     player1.reset()
@@ -50,6 +61,19 @@ while Game:
     player2.reset()
     player2.update_r()
     ball.reset()
+    if finish != True:
+        ball.rect.x += ball_speed_x
+        ball.rect.y += ball_speed_y
+    if ball.rect.y > h - 50 or ball.rect.y < 0:
+        ball_speed_y *= -1
+    if sprite.collide_rect(player1, ball) or sprite.collide_rect(player2, ball):
+        ball_speed_x *= -1
+    if ball.rect.x < 0:
+        finish = True
+        window.blit(lose1, (240,240))
+    if ball.rect.x > w-30:
+        finish = True
+        window.blit(lose2, (240,240))
     for e in event.get():
         if e.type == QUIT:
             Game = False
